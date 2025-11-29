@@ -1,0 +1,15 @@
+{
+  "name": "conduit",
+  "main": "./src/main.ts",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "version": "0.0.0",
+  "dependencies": {
+    "@nativescript/core": "*",
+    "@triniwiz/nativescript-masonkit": "1.0.0-alpha.36"
+  },
+  "devDependencies": {
+    "@nativescript/android": "~9.0.0",
+    "@nativescript/ios": "~9.0.0",
+    "@nativescript/tailwind": "^2.1.0"
+  }
+}
