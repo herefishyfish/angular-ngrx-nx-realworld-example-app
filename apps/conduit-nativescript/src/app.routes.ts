@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from '@realworld/auth/data-access';
 
 export const routes: Routes = [
   {
@@ -9,8 +8,12 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('@realworld/home/feature-home').then((m) => m.HomeComponent),
+    loadComponent: () => import('./features/home/home.page').then((m) => m.HomePage),
   },
+  // {
+  //   path: 'home',
+  //   loadComponent: () => import('@realworld/home/feature-home').then((m) => m.HomeComponent),
+  // },
   // {
   //   path: 'login',
   //   loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginComponent),
@@ -19,10 +22,10 @@ export const routes: Routes = [
   //   path: 'register',
   //   loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterComponent),
   // },
-  {
-    path: 'article',
-    loadChildren: () => import('@realworld/articles/article').then((m) => m.ARTICLE_ROUTES),
-  },
+  // {
+  //   path: 'article',
+  //   loadChildren: () => import('@realworld/articles/article').then((m) => m.ARTICLE_ROUTES),
+  // },
   // {
   //   path: 'settings',
   //   loadComponent: () =>

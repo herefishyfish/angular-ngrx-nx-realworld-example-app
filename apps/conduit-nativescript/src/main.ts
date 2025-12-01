@@ -27,6 +27,9 @@ Object.values(MasonKitWeb).forEach((component: any) => {
   }
 });
 
+import { installButtonPatch } from './core/web/button';
+installButtonPatch();
+
 /**
  * Disable zone by setting this to true
  * Then also adjust polyfills.ts (see note there)

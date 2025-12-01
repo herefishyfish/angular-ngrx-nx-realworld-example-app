@@ -28,6 +28,7 @@
     "@nx/angular": "22.1.1",
     "eslint-plugin-ngrx": "2.1.4",
     "marked": "5.0.1",
+    "ngxtension": "^7.0.2",
     "rxjs": "7.8.1",
     "zone.js": "^0.15.0"
   },
@@ -79,6 +80,7 @@
     "jasmine-marbles": "0.9.2",
     "jiti": "2.4.2",
     "jsdom": "~22.1.0",
+    "ngxtension-plugin": "^7.0.2",
     "nx": "22.1.1",
     "prettier": "3.1.0",
     "react": "^18.2.6",
