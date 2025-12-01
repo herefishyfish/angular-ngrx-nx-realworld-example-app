@@ -7,7 +7,7 @@ import { DrawerService } from '../../services/drawer.service';
   template: `
     <div class="drawer-container">
       <div class="header">
-        <span class="title">Conduit</span>
+        <h1 class="title">Conduit NativeScript</h1>
       </div>
 
       <div class="nav-section">
@@ -44,7 +44,6 @@ import { DrawerService } from '../../services/drawer.service';
     .title {
       font-size: 24;
       font-weight: bold;
-      color: #ffffff;
     }
 
     .nav-section {
