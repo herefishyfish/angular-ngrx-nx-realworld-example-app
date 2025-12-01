@@ -1,3 +1,17 @@
 <RootLayout>
-  <page-router-outlet />
+  <Frame>
+    <Page actionBarHidden="true">
+      <Drawer #drawer leftDrawerMode="slide" (loaded)="onDrawerLoaded($event)">
+        <!-- Left drawer content -->
+        <StackLayout leftDrawer class="drawer-left">
+          <cdt-drawer-content />
+        </StackLayout>
+
+        <!-- Main content -->
+        <StackLayout mainContent>
+          <page-router-outlet />
+        </StackLayout>
+      </Drawer>
+    </Page>
+  </Frame>
 </RootLayout>

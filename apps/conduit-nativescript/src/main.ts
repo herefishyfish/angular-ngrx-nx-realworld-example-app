@@ -27,6 +27,12 @@ Object.values(MasonKitWeb).forEach((component: any) => {
   }
 });
 
+/**
+ * Install UI Drawer gestures
+ */
+import { install as installDrawer } from '@nativescript-community/ui-drawer';
+installDrawer();
+
 import { installButtonPatch } from './core/web/button';
 installButtonPatch();
 
