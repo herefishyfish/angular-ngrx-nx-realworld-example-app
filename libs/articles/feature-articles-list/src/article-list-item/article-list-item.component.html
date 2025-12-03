@@ -15,10 +15,13 @@
         'btn-primary': article().favorited
       }"
       (click)="toggleFavorite(article())"
-      >
+    >
       <!-- <i class="ion-heart"></i> -->
       💖
       {{ article().favoritesCount }}
+    </button>
+    <button (click)="navigateToArticle.emit(article().slug)" class="">
+      read more
     </button>
   </div>
   <a (click)="navigateToArticle.emit(article().slug)" class="preview-link">

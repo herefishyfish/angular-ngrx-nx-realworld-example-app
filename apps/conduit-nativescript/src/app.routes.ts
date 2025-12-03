@@ -29,10 +29,10 @@ export const routes: Routes = [
     path: 'profile/:username',
     loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
   },
-  // {
-  //   path: 'article',
-  //   loadChildren: () => import('@realworld/articles/article').then((m) => m.ARTICLE_ROUTES),
-  // },
+  {
+    path: 'article/:slug',
+    loadComponent: () => import('./features/article/article.page').then((m) => m.ArticlePage),
+  },
   // {
   //   path: 'editor',
   //   loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),

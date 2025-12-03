@@ -1,5 +1,5 @@
 @if (!$isLoading()) {
-  <ListView [items]="$articles()" class="list-group">
+  <ListView [items]="$articles()" class="list-group" (loadMoreItems)="loadMoreArticles()">
     <ng-template let-article="item">
       <div class="p-2">
         <cdt-article-list-item
