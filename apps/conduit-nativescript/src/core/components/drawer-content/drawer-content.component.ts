@@ -5,60 +5,30 @@ import { DrawerService } from '../../services/drawer.service';
 @Component({
   selector: 'cdt-drawer-content',
   template: `
-    <div class="drawer-container">
-      <div class="header">
-        <h1 class="title">Conduit NativeScript</h1>
+    <div class="bg-white h-full w-2/3 lg:w-1/4">
+      <div class="bg-[#5CB85C] pt-10 pb-5 px-5">
+        <h1 class="text-2xl font-bold text-white">Conduit NativeScript</h1>
       </div>
 
-      <div class="nav-section">
-        <div class="nav-item" (tap)="navigateTo('/home')">
-          <span class="nav-text">Home</span>
+      <div class="py-2">
+        <div class="py-3 px-5" (tap)="navigateTo('/home')">
+          <span class="text-base text-gray-800">Home</span>
         </div>
 
-        <div class="nav-item" (tap)="navigateTo('/login')">
-          <span class="nav-text">Sign In</span>
+        <div class="py-3 px-5" (tap)="navigateTo('/login')">
+          <span class="text-base text-gray-800">Sign In</span>
         </div>
 
-        <div class="nav-item" (tap)="navigateTo('/register')">
-          <span class="nav-text">Sign Up</span>
+        <div class="py-3 px-5" (tap)="navigateTo('/register')">
+          <span class="text-base text-gray-800">Sign Up</span>
         </div>
 
-        <div class="nav-item border-top border-gray-300 border-4" (tap)="navigateTo('/settings')">
-          <span class="nav-text">Settings</span>
+        <div class="py-3 px-5 border-t border-gray-300 mt-2" (tap)="navigateTo('/settings')">
+          <span class="text-base text-gray-800">Settings</span>
         </div>
       </div>
     </div>
   `,
-  styles: [`
-    .drawer-container {
-      background-color: #ffffff;
-      height: 100%;
-      width: 100%;
-    }
-
-    .header {
-      background-color: #5cb85c;
-      padding: 40 20 20 20;
-    }
-
-    .title {
-      font-size: 24;
-      font-weight: bold;
-    }
-
-    .nav-section {
-      padding: 8 0;
-    }
-
-    .nav-item {
-      padding: 14 20;
-    }
-
-    .nav-text {
-      font-size: 16;
-      color: #333333;
-    }
-  `],
   imports: [NativeScriptCommonModule],
   schemas: [NO_ERRORS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
