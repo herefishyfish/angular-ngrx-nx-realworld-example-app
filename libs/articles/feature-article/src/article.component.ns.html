@@ -1,14 +1,14 @@
-<ActionBar title="Conduit" backgroundColor="#333" color="white">
+<ActionBar [flat]="true" title="Conduit" backgroundColor="white" color="#5CB85C">
   <NavigationButton text="Back" (tap)="goBack()" android.systemIcon="ic_menu_back"></NavigationButton>
 </ActionBar>
 
 <StackLayout>
-  @if (!$isLoading()) {
-    @if ($article(); as article) {
-    <ScrollView>
-      <div class="p-4">
+  @if (!$isLoading()) { @if ($article(); as article) {
+  <ScrollView>
+    <div>
+      <div class="p-4 bg-[#333]">
         <!-- Article Title -->
-        <h1 class="text-2xl font-bold text-gray-900 mb-4">{{ article.title }}</h1>
+        <h1 class="text-2xl font-bold text-white mb-4">{{ article.title }}</h1>
 
         <!-- Author Info -->
         <div class="flex flex-row items-center mb-4">
@@ -21,13 +21,15 @@
 
         <!-- Tags -->
         @if (article.tagList.length > 0) {
-          <div class="flex flex-row flex-wrap mb-4">
-            @for (tag of article.tagList; track tag) {
-              <span class="text-xs text-[#aaa] border border-[#ddd] rounded-full py-1 px-2 mr-1 mb-1">{{ tag }}</span>
-            }
-          </div>
+        <div class="flex flex-row flex-wrap mb-4">
+          @for (tag of article.tagList; track tag) {
+          <span class="text-xs text-[#aaa] border border-[#ddd] rounded-full py-1 px-2 mr-1 mb-1">{{ tag }}</span>
+          }
+        </div>
         }
+      </div>
 
+      <div class="bg-white p-4">
         <!-- Article Body -->
         <div class="mb-6">
           <span class="text-gray-800 leading-relaxed">{{ article.body }}</span>
@@ -36,40 +38,40 @@
         <!-- Favorite Button -->
         <div class="mb-6">
           @if (article.favorited) {
-            <button class="bg-[#5CB85C] text-white px-4 py-2 rounded" (tap)="unfavorite(article.slug)">
-              ♥ Unfavorite ({{ article.favoritesCount }})
-            </button>
+          <button class="bg-[#5CB85C] text-white px-4 py-2 rounded" (tap)="unfavorite(article.slug)">
+            ♥ Unfavorite ({{ article.favoritesCount }})
+          </button>
           } @else {
-            <button class="border border-[#5CB85C] text-[#5CB85C] px-4 py-2 rounded" (tap)="favorite(article.slug)">
-              ♡ Favorite ({{ article.favoritesCount }})
-            </button>
+          <button class="border border-[#5CB85C] text-[#5CB85C] px-4 py-2 rounded" (tap)="favorite(article.slug)">
+            ♡ Favorite ({{ article.favoritesCount }})
+          </button>
           }
         </div>
 
         <!-- Comments Section -->
         <div class="border-t border-gray-200 pt-4">
           <span class="text-lg font-bold mb-4">Comments</span>
-          
+
           @for (comment of $comments(); track comment.id) {
-            <div class="bg-gray-50 p-3 rounded mb-3 mt-3">
-              <div class="flex flex-row items-center mb-2">
-                <img [src]="comment.author.image" class="w-6 h-6 rounded-full mr-2" />
-                <span class="text-[#5CB85C] text-sm">{{ comment.author.username }}</span>
-                <span class="text-gray-400 text-xs ml-2">{{ comment.createdAt | date: 'longDate' }}</span>
-              </div>
-              <span class="text-gray-800">{{ comment.body }}</span>
+          <div class="bg-gray-50 p-3 rounded mb-3 mt-3">
+            <div class="flex flex-row items-center mb-2">
+              <img [src]="comment.author.image" class="w-6 h-6 rounded-full mr-2" />
+              <span class="text-[#5CB85C] text-sm">{{ comment.author.username }}</span>
+              <span class="text-gray-400 text-xs ml-2">{{ comment.createdAt | date: 'longDate' }}</span>
             </div>
+            <span class="text-gray-800">{{ comment.body }}</span>
+          </div>
           } @empty {
-            <span class="text-gray-500 mt-3">No comments yet.</span>
+          <span class="text-gray-500 mt-3">No comments yet.</span>
           }
         </div>
       </div>
-    </ScrollView>
-    }
-  } @else {
-    <StackLayout class="p-4">
-      <ActivityIndicator busy="true" class="m-4"></ActivityIndicator>
-      <span class="text-center text-gray-500">Loading article...</span>
-    </StackLayout>
+    </div>
+  </ScrollView>
+  } } @else {
+  <StackLayout class="p-4">
+    <ActivityIndicator busy="true" class="m-4"></ActivityIndicator>
+    <span class="text-center text-gray-500">Loading article...</span>
+  </StackLayout>
   }
 </StackLayout>
