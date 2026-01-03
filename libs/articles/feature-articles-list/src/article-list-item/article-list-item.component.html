@@ -1,14 +1,12 @@
 <div class="py-6 border-t border-[#e5e5e5]">
   <div class="flex items-center justify-between mb-4">
     <div class="flex items-center">
-      <a [routerLink]="['/profile', article().author.username]">
-        <img 
-          [src]="article().author.image" 
-          class="w-8 h-8 rounded-full"
-        />
-      </a>
+      <img [src]="article().author.image" class="w-8 h-8 rounded-full" />
       <div class="flex flex-col ml-2 leading-none">
-        <a class="text-[#5CB85C] font-medium text-base hover:text-[#3d8b3d] hover:underline" [routerLink]="['/profile', article().author.username]">
+        <a
+          class="text-[#5CB85C] font-medium text-base hover:text-[#3d8b3d] hover:underline"
+          [routerLink]="['/profile', article().author.username]"
+        >
           {{ article().author.username }}
         </a>
         <span class="text-xs text-[#bbb] mt-1">
@@ -27,7 +25,7 @@
       ♥ {{ article().favoritesCount }}
     </button>
   </div>
-  
+
   <a (click)="navigateToArticle.emit(article().slug)" class="block cursor-pointer hover:no-underline">
     <h1 data-testid="article-list-title" class="text-2xl font-semibold mb-1">
       {{ article().title }}
