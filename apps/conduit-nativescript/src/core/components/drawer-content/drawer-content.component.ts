@@ -23,7 +23,7 @@ import { DrawerService } from '../../services/drawer.service';
           <span class="nav-text">Sign Up</span>
         </div>
 
-        <div class="nav-item" (tap)="navigateTo('/settings')">
+        <div class="nav-item border-top border-gray-300 border-4" (tap)="navigateTo('/settings')">
           <span class="nav-text">Settings</span>
         </div>
       </div>

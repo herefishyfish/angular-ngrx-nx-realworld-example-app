@@ -54,6 +54,9 @@ export abstract class ArticleComponentBase implements OnInit, OnDestroy {
     this.articleStore.addComment(comment);
   }
 
+  // @ts-ignore
+  goBack() {}
+
   ngOnDestroy() {
     this.articleStore.initializeArticle();
   }
