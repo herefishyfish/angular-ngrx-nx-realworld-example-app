@@ -1,32 +1,42 @@
-<div class="article-preview">
-  <div class="article-meta">
-    <a>
-      <img [src]="article().author.image" />
-    </a>
-    <div class="info">
-      <span class="date">
-        {{ article().createdAt | date: 'longDate' }}
-      </span>
+<div class="py-6 border-t border-[#e5e5e5]">
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center">
+      <img [src]="article().author.image" class="w-8 h-8 rounded-full" />
+      <div class="flex flex-col ml-2 leading-none">
+        <a
+          class="text-[#5CB85C] font-medium text-base hover:text-[#3d8b3d] hover:underline"
+          [routerLink]="['/profile', article().author.username]"
+        >
+          {{ article().author.username }}
+        </a>
+        <span class="text-xs text-[#bbb] mt-1">
+          {{ article().createdAt | date: 'longDate' }}
+        </span>
+      </div>
     </div>
     <button
+      class="py-1 px-2 text-sm rounded border cursor-pointer"
       [ngClass]="{
-        'btn-outline-primary': article().favorited,
-        'btn-primary': article().favorited
+        'bg-[#5CB85C] text-white border-[#5CB85C]': article().favorited,
+        'bg-transparent text-[#5CB85C] border-[#5CB85C] hover:bg-[#5CB85C] hover:text-white': !article().favorited
       }"
-      class="btn btn-sm pull-xs-right"
       (click)="toggleFavorite(article())"
     >
-      <i class="ion-heart"></i>
-      {{ article().favoritesCount }}
+      ♥ {{ article().favoritesCount }}
     </button>
   </div>
-  <a (click)="navigateToArticle.emit(article().slug)" class="preview-link">
-    <h1 data-testid="article-list-title">{{ article().title }}</h1>
-    <p>{{ article().description }}</p>
-    <span>Read more...</span>
-    <ul class="tag-list">
+
+  <a (click)="navigateToArticle.emit(article().slug)" class="block cursor-pointer hover:no-underline">
+    <h1 data-testid="article-list-title" class="text-2xl font-semibold mb-1">
+      {{ article().title }}
+    </h1>
+    <p class="text-base text-[#999] font-light mb-4 leading-relaxed">
+      {{ article().description }}
+    </p>
+    <span class="text-xs text-[#bbb] font-light">Read more...</span>
+    <ul class="flex flex-wrap list-none p-0 mt-2 gap-1 float-right">
       @for (tag of article().tagList; track tag) {
-        <li class="tag-default tag-pill tag-outline">
+        <li class="text-xs text-[#aaa] border border-[#ddd] rounded-full py-1 px-2">
           {{ tag }}
         </li>
       }

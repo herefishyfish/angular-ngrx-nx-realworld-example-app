@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, output, input } from '@angular/core
 import { RouterModule } from '@angular/router';
 import { NgClass, DatePipe } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
+
 @Component({
   selector: 'cdt-article-list-item',
   templateUrl: './article-list-item.component.html',

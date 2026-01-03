@@ -1,12 +1,12 @@
-<ul class="pagination">
+<ul class="flex flex-wrap list-none p-0 m-0 mt-4">
   @for (pageNumber of totalPages(); track pageNumber) {
     <li
       data-testid="pagination-item"
-      class="page-item"
-      [ngClass]="{ active: pageNumber === currentPage() }"
+      class="mr-0"
+      [ngClass]="{ 'bg-[#5CB85C]': pageNumber === currentPage() }"
       (click)="setPage.emit(pageNumber)"
     >
-      <a data-testid="pagination-link" class="page-link">{{ pageNumber }}</a>
+      <a data-testid="pagination-link" class="block py-2 px-3 border border-[#ddd] -ml-px cursor-pointer hover:bg-gray-100" [ngClass]="{ 'text-white hover:bg-[#5CB85C]': pageNumber === currentPage(), 'text-[#5CB85C]': pageNumber !== currentPage() }">{{ pageNumber }}</a>
     </li>
   }
 </ul>

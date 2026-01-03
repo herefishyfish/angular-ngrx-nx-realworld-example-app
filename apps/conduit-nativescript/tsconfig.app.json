@@ -4,6 +4,9 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
-  "include": ["./src/environments/environment.*.ts"],
+  "include": [
+    "./src/environments/environment.*.ts",
+    "../../libs/**/*.ns.ts"
+  ],
   "files": ["./references.d.ts", "./src/main.ts", "./src/polyfills.ts"]
 }

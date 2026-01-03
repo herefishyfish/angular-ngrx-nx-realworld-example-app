@@ -9,7 +9,7 @@
     >
     </cdt-article-list-item>
   } @empty {
-    <div>No articles are here... yet.</div>
+    <div class="py-6 text-gray-500">No articles are here... yet.</div>
   }
 
   <cdt-pager
@@ -18,5 +18,5 @@
     [totalPages]="$totalPages()"
   ></cdt-pager>
 } @else {
-  <div>Loading articles...</div>
+  <div class="py-6 text-gray-500">Loading articles...</div>
 }

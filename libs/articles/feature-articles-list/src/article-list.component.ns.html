@@ -1,0 +1,21 @@
+@if (!$isLoading()) {
+  <ListView [items]="$articles()" class="list-group" (loadMoreItems)="loadMoreArticles()">
+    <ng-template let-article="item">
+      <div class="p-2">
+        <cdt-article-list-item
+          data-testid="article-list"
+          (navigateToArticle)="navigateToArticle($event)"
+          (unFavorite)="unFavorite($event)"
+          (favorite)="favorite($event)"
+          [article]="article"
+        >
+        </cdt-article-list-item>
+      </div>
+    </ng-template>
+  </ListView>
+} @else {
+  <StackLayout>
+    <Label>Loading...</Label>
+    <ActivityIndicator busy="true" class="m-4"></ActivityIndicator>
+  </StackLayout>
+}

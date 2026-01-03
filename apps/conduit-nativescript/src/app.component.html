@@ -1,80 +1,17 @@
-  <!-- <div style="height: 100%; width: 100%; padding: 32 24px 32 12px">
-    <div
-      style="display: grid; grid-template-columns: 1fr 2fr; grid-template-rows: auto 1fr auto; gap: 12px; height: 100%"
-    >
-      <div style="grid-column: 1 / -1; background: #f0f4ff6b; padding: 10px;">
-        Header (grid-column: 1 / -1)
-      </div>
-
-      <div style="background: #fff7e64d; padding: 10px;">
-        Sidebar (1fr)
-      </div>
-
-      <div style="background: #e6fff252; padding: 10px;">
-        Main content (2fr)
-
-        <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2px;
-            padding: 14px;
-            background: #ffffff;
-          "
-        >
-          @for (d of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track d) {
-            <div
-              [style]="{
-                background:
-                  d === 1 ? '#ffdddd' :
-                  d === 2 ? '#ddffdd' :
-                  d === 3 ? '#ddddff' :
-                  d === 4 ? '#fff4cc' :
-                  d === 5 ? '#e0e0e0' :
-                  d === 6 ? '#ffd7ef' :
-                  d === 7 ? '#d7f0ff' :
-                  d === 8 ? '#e8d7ff' :
-                  d === 9 ? '#f2ffd7' :
-                            '#ffe8d7',
-                padding: '16px',
-                borderRadius: '8px',
-                gridColumn: d === 3 ? 'span 2' : 'auto',
-                gridRow: d === 5 ? 'span 2' : 'auto'
-              }"
-            >
-              <div>Grid {{ d }}</div>
-            </div>
-          }
-        </div>
-      </div>
-
-      <div style="grid-column: 1 / -1; background: #f6f6f66b; padding: 10px;">
-        <div>Footer (grid-column: 1 / -1)</div>
-      </div>
-
-      <div
-        style="
-          position: absolute;
-          left: 50;
-          bottom: 50;
-          background: #000000a1;
-          color: #fff;
-          padding: 6px 12px;
-          border-radius: 4px;
-          filter: blur(14px);
-        "
-      >
-        <h1>NativeScript Grids!?</h1>
-      </div>
-    </div>
-  </div> -->
-
 <RootLayout>
-  <page-router-outlet actionBarVisibility="never" />
-</RootLayout>
-<!-- <cdt-navbar [isLoggedIn]="authStore.loggedIn()" [user]="authStore.user()"></cdt-navbar>
-<page-router-outlet></page-router-outlet>
+  <Frame>
+    <Page actionBarHidden="true">
+      <Drawer #drawer leftDrawerMode="slide" (loaded)="onDrawerLoaded($event)">
+        <!-- Left drawer content -->
+        <StackLayout leftDrawer class="drawer-left">
+          <cdt-drawer-content />
+        </StackLayout>
 
-@defer (on idle) {
-  <cdt-footer></cdt-footer>
-} -->
+        <!-- Main content -->
+        <StackLayout mainContent>
+          <page-router-outlet />
+        </StackLayout>
+      </Drawer>
+    </Page>
+  </Frame>
+</RootLayout>
