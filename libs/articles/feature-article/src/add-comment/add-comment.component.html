@@ -1,21 +1,21 @@
 <cdt-list-errors> </cdt-list-errors>
 
-<div class="card comment-form">
+<div class="border border-[#e5e5e5] rounded mt-4">
   <form [formGroup]="form" (ngSubmit)="submitComment.emit(form.controls.comment.value)">
-    <fieldset class="form-group required">
+    <fieldset class="p-0 m-0 border-0">
       <textarea
         formControlName="comment"
         rows="5"
         type="text"
         placeholder="Write a comment..."
-        class="form-control form-control-lg"
+        class="block w-full py-3 px-6 text-base leading-normal text-gray-700 bg-white border-0 border-b border-[#e5e5e5] rounded-t transition focus:border-[#5CB85C] focus:outline-none"
       >
       </textarea>
       <cdt-input-errors [control]="form.controls.comment" />
     </fieldset>
-    <div class="card-footer">
-      <img [src]="currentUser().image" class="comment-author-img" />
-      <button (click)="submitComment.emit(form.controls.comment.value)" class="btn btn-sm btn-primary" type="submit">
+    <div class="py-3 px-5 bg-[#f5f5f5]">
+      <img [src]="currentUser().image" class="w-8 h-8 rounded-full inline-block" />
+      <button (click)="submitComment.emit(form.controls.comment.value)" class="float-right py-1 px-2 text-sm text-white bg-[#5CB85C] border border-[#5CB85C] rounded cursor-pointer hover:bg-[#449d44]" type="submit">
         Post Comment
       </button>
     </div>

@@ -1,5 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  cursor: pointer;
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+@layer base {
+  html {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #373a3c;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+
+  body {
+    margin: 0;
+    background-color: #fff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+
+  fieldset {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  button:focus {
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@layer utilities {
+  /* Hidden utility */
+  [hidden] {
+    display: none !important;
+  }
 }

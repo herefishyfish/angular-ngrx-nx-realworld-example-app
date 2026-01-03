@@ -1,45 +1,44 @@
-<nav class="navbar navbar-light">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">conduit</a>
+<nav class="relative py-2 px-4 bg-white">
+  <div class="max-w-[1140px] mx-auto px-4 flex items-center justify-between">
+    <a class="font-['Titillium_Web'] text-2xl py-1 text-[#5CB85C] no-underline" routerLink="/">conduit</a>
 
     @if (!isLoggedIn()) {
-      <ul class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
+      <ul class="list-none p-0 m-0 flex items-center ml-auto">
+        <li class="ml-4">
+          <a class="block py-2 text-black/30 hover:text-black/60 hover:no-underline" routerLink="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
+        <li class="ml-4">
+          <a class="block py-2 text-black/30 hover:text-black/60 hover:no-underline [&.active]:text-black/80" routerLink="/login" routerLinkActive="active">Sign in</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
+        <li class="ml-4">
+          <a class="block py-2 text-black/30 hover:text-black/60 hover:no-underline [&.active]:text-black/80" routerLink="/register" routerLinkActive="active">Sign up</a>
         </li>
       </ul>
     } @else {
-      <ul class="nav navbar-nav pull-xs-right">
-        <li class="nav-item">
-          <!-- Add "active" class when you're on that page" -->
+      <ul class="list-none p-0 m-0 flex items-center ml-auto">
+        <li class="ml-4">
           <a
-            class="nav-link active"
+            class="block py-2 text-black/30 hover:text-black/60 hover:no-underline [&.active]:text-black/80"
             [routerLink]="['/']"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             >Home</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+        <li class="ml-4">
+          <a class="block py-2 text-black/30 hover:text-black/60 hover:no-underline [&.active]:text-black/80" routerLink="/editor" routerLinkActive="active">
             <i class="ion-compose"></i>&nbsp;New Post
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/settings" routerLinkActive="active">
+        <li class="ml-4">
+          <a class="block py-2 text-black/30 hover:text-black/60 hover:no-underline [&.active]:text-black/80" routerLink="/settings" routerLinkActive="active">
             <i class="ion-gear-a"></i>&nbsp;Settings
           </a>
         </li>
-        <li class="nav-item">
+        <li class="ml-4">
           <a
             data-testid="loggedin-user"
-            class="nav-link"
+            class="block py-2 text-black/30 hover:text-black/60 hover:no-underline [&.active]:text-black/80"
             [routerLink]="['/profile', user().username]"
             routerLinkActive="active"
           >

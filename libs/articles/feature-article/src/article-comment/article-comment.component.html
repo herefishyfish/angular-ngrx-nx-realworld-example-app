@@ -1,20 +1,20 @@
-<div class="card">
-  <div class="card-block">
-    <p class="card-text">{{ comment().body }}</p>
+<div class="border border-[#e5e5e5] rounded mt-4">
+  <div class="p-5">
+    <p class="mb-0 leading-relaxed">{{ comment().body }}</p>
   </div>
-  <div class="card-footer">
-    <a class="comment-author" [routerLink]="['/profile', comment().author.username]">
-      <img [src]="comment().author.image" class="comment-author-img" />
+  <div class="py-3 px-5 bg-[#f5f5f5] border-t border-[#e5e5e5] text-[#aaa] text-xs">
+    <a class="inline-block mr-1" [routerLink]="['/profile', comment().author.username]">
+      <img [src]="comment().author.image" class="w-5 h-5 rounded-full" />
     </a>
     &nbsp;
-    <a class="comment-author" [routerLink]="['/profile', comment().author.username]">
+    <a class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline" [routerLink]="['/profile', comment().author.username]">
       {{ comment().author.username }}
     </a>
-    <span class="date-posted">
+    <span class="ml-2">
       {{ comment().createdAt | date: 'longDate' }}
     </span>
-    <span class="mod-options" [hidden]="currentUser().username !== comment().author.username">
-      <i class="ion-trash-a" (click)="delete.emit({ commentId: comment().id, slug: article().slug })"></i>
+    <span class="float-right" [hidden]="currentUser().username !== comment().author.username">
+      <i class="ion-trash-a cursor-pointer hover:text-red-500" (click)="delete.emit({ commentId: comment().id, slug: article().slug })"></i>
     </span>
   </div>
 </div>
