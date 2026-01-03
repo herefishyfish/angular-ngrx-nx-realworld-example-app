@@ -6,6 +6,7 @@ import {
   registerElement,
   runNativeScriptAngularApp,
 } from '@nativescript/angular';
+import { CSSType } from '@nativescript/core';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { withInterceptorsFromDi } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -31,7 +32,10 @@ Object.values(MasonKitWeb).forEach((component: any) => {
 });
 import { Button, View } from '@triniwiz/nativescript-masonkit';
 registerElement('button', () => Button);
-registerElement('a', () => View);
+
+@CSSType('a')
+class Anchor extends View {}
+registerElement('a', () => Anchor);
 
 /**
  * Install UI Drawer gestures
@@ -40,7 +44,7 @@ import { install as installDrawer } from '@nativescript-community/ui-drawer';
 installDrawer();
 
 import { installButtonPatch } from './core/web/button';
-installButtonPatch();
+installButtonPatch([Anchor]);
 
 import { TextField } from '@nativescript/core';
 registerElement('input', () => TextField);

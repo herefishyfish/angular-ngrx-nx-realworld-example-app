@@ -22,20 +22,20 @@
         'bg-[#5CB85C] text-white border-[#5CB85C]': article().favorited,
         'bg-transparent text-[#5CB85C] border-[#5CB85C] hover:bg-[#5CB85C] hover:text-white': !article().favorited
       }"
-      (tap)="toggleFavorite(article())"
+      (click)="toggleFavorite(article())"
     >
-      <i class="ion-heart"></i> {{ article().favoritesCount }}
+      ❤️ {{ article().favoritesCount }}
     </button>
   </div>
   
-  <a (tap)="navigateToArticle.emit(article().slug)" class="block cursor-pointer hover:no-underline">
+  <a (click)="navigateToArticle.emit(article().slug)" class="block cursor-pointer hover:no-underline">
     <h1 data-testid="article-list-title" class="text-2xl font-semibold mb-1">
       {{ article().title }}
     </h1>
     <p class="text-base text-[#999] font-light mb-4 leading-relaxed">
       {{ article().description }}
     </p>
-    <span class="text-xs text-[#bbb] font-light">Read more...</span>
+    <span class="text-xs text-[#bbb] font-light">Read more please...</span>
     <ul class="flex flex-wrap list-none p-0 mt-2 gap-1 float-right">
       @for (tag of article().tagList; track tag) {
         <li class="text-xs text-[#aaa] border border-[#ddd] rounded-full py-1 px-2">
