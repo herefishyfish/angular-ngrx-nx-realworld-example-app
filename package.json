@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nx run conduit:serve",
     "build": "npx nx run conduit:build --configuration=production",
+    "postinstall": "npx patch-package",
     "lint": "npx nx affected -t lint",
     "format": "npx nx format:check --affected",
     "format:write": "npx nx format:write --affected",

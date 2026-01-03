@@ -13,7 +13,7 @@ import { ArticleComponentBase } from './article.component.base';
 export class ArticleComponent extends ArticleComponentBase {
   private readonly routerExtension = inject(RouterExtensions);
 
-  override goBack() {
+  goBack() {
     this.routerExtension.back();
   }
 }
