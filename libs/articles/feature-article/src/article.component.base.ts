@@ -54,6 +54,9 @@ export abstract class ArticleComponentBase implements OnInit, OnDestroy {
     this.articleStore.addComment(comment);
   }
 
+  /** Override in NativeScript app for back navigation */
+  goBack() {}
+
   ngOnDestroy() {
     this.articleStore.initializeArticle();
   }

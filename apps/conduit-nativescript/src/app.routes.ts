@@ -9,7 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadComponent: () => import('./features/home/home.page').then((m) => m.HomePage),
+    loadComponent: () => import('@realworld/home/feature-home').then((m) => m.HomeComponent),
   },
   {
     path: 'login',
@@ -31,8 +31,12 @@ export const routes: Routes = [
   },
   {
     path: 'article/:slug',
-    loadComponent: () => import('./features/article/article.page').then((m) => m.ArticlePage),
+    loadComponent: () => import('@realworld/articles/article').then((m) => m.ArticleComponent),
   },
+  // {
+  //   path: 'benchmark',
+  //   loadComponent: () => import('./features/memory-footprint.component').then((m) => m.MemoryFootprintComponent),
+  // },
   // {
   //   path: 'editor',
   //   loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),

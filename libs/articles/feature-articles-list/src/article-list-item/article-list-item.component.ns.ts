@@ -2,12 +2,11 @@ import { Component, ChangeDetectionStrategy, output, input } from '@angular/core
 import { RouterModule } from '@angular/router';
 import { NgClass, DatePipe } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
-import { TapDirective } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-article-list-item',
   templateUrl: './article-list-item.component.html',
-  imports: [RouterModule, NgClass, DatePipe, TapDirective],
+  imports: [RouterModule, NgClass, DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {

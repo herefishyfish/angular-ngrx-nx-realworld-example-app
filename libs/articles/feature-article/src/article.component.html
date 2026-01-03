@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="container">
         <h1 data-testid="article-title">{{ article.title }}</h1>
-        <!-- <cdt-article-meta
+        <cdt-article-meta
           [article]="article"
           (follow)="follow($event)"
           (unfollow)="unfollow($event)"
@@ -12,7 +12,7 @@
           (delete)="delete($event)"
           [canModify]="$canModify()"
         >
-        </cdt-article-meta> -->
+        </cdt-article-meta>
       </div>
     </div>
 
@@ -22,12 +22,12 @@
           <div data-testid="article-body">
             {{ article.body | markdown }}
           </div>
-          <!-- <div data-testid="article-body" [innerHTML]="article.body | markdown"></div> -->
+          <div data-testid="article-body" [innerHTML]="article.body | markdown"></div>
         </div>
       </div>
       <hr />
       <div class="article-actions">
-        <!-- <cdt-article-meta
+        <cdt-article-meta
           [article]="article"
           (follow)="follow($event)"
           (unfollow)="unfollow($event)"
@@ -35,13 +35,13 @@
           (unfavorite)="unfavorite($event)"
           (delete)="delete($event)"
           [canModify]="$canModify()"
-        ></cdt-article-meta> -->
+        ></cdt-article-meta>
       </div>
 
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
           @if ($isAuthenticated()) {
-            <!-- <cdt-add-comment [article]="article" [currentUser]="$currentUser()" (submitComment)="submit($event)" /> -->
+            <cdt-add-comment [article]="article" [currentUser]="$currentUser()" (submitComment)="submit($event)" />
           } @else {
             <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
             this article.

@@ -1,43 +1,16 @@
-import { effect, inject, untracked } from '@angular/core';
-import { ArticlesListStore, ListType, articlesListInitialState } from '@realworld/articles/data-access';
-import { AuthStore } from '@realworld/auth/data-access';
+import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { HomeComponentBase } from './home.component.base';
 import { HomeStore } from './home.store';
+import { TagsListComponent } from './tags-list/tags-list.component';
+import { ArticleListComponent } from '@realworld/articles/articles-list';
 
-export abstract class HomeComponentBase {
-  protected readonly articlesListStore = inject(ArticlesListStore);
-  protected readonly authStore = inject(AuthStore);
-  protected readonly homeStore = inject(HomeStore);
-
-  $listConfig = this.articlesListStore.listConfig;
-  $tags = this.homeStore.tags;
-
-  readonly loadArticlesOnLogin = effect(() => {
-    const isLoggedIn = this.authStore.loggedIn();
-    untracked(() => this.getArticles(isLoggedIn));
-  });
-
-  setListTo(type: ListType = 'ALL') {
-    const config = { ...articlesListInitialState.listConfig, type };
-    this.articlesListStore.setListConfig(config);
-    this.articlesListStore.loadArticles(this.$listConfig());
-  }
-
-  getArticles(isLoggedIn: boolean) {
-    if (isLoggedIn) {
-      this.setListTo('FEED');
-    } else {
-      this.setListTo('ALL');
-    }
-  }
-
-  setListTag(tag: string) {
-    this.articlesListStore.setListConfig({
-      ...articlesListInitialState.listConfig,
-      filters: {
-        ...articlesListInitialState.listConfig.filters,
-        tag,
-      },
-    });
-    this.articlesListStore.loadArticles(this.$listConfig());
-  }
-}
+@Component({
+  selector: 'cdt-home',
+  templateUrl: './home.component.html',
+  imports: [NgClass, TagsListComponent, ArticleListComponent],
+  providers: [HomeStore],
+  schemas: [NO_ERRORS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class HomeComponent extends HomeComponentBase {}

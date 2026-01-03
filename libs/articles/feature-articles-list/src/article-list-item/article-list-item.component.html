@@ -1,36 +1,29 @@
 <div class="article-preview">
   <div class="article-meta">
-    <a>
-      <img [src]="article().author.image" />
-    </a>
+    <img class="rounded-full w-12 h-12" [src]="article().author.image" />
     <div class="info">
       <span class="date">
         {{ article().createdAt | date: 'longDate' }}
       </span>
     </div>
     <button
-      color="black"
       [ngClass]="{
         'btn-outline-primary': article().favorited,
         'btn-primary': article().favorited
       }"
-      (click)="toggleFavorite(article())"
+      (tap)="toggleFavorite(article())"
     >
-      <!-- <i class="ion-heart"></i> -->
-      💖
+      ❤️
       {{ article().favoritesCount }}
     </button>
-    <button (click)="navigateToArticle.emit(article().slug)" class="">
-      read more
-    </button>
   </div>
-  <a (click)="navigateToArticle.emit(article().slug)" class="preview-link">
+  <a (tap)="navigateToArticle.emit(article().slug)" class="preview-link">
     <h1 data-testid="article-list-title">{{ article().title }}</h1>
     <p>{{ article().description }}</p>
-    <span>Read more...</span>
+    <span class="text-xs text-zinc-500">Read more of this really cool article...</span>
     <ul class="tag-list">
       @for (tag of article().tagList; track tag) {
-        <li class="tag-default tag-pill tag-outline">
+        <li class="tag-default tag-pill tag-outline rounded-sm px-2 py-1 mr-1 mb-1">
           {{ tag }}
         </li>
       }

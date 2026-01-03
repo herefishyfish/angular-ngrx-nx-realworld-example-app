@@ -4,7 +4,7 @@ import { PagerComponent } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-article-list',
-  templateUrl: './article-list.component.html',
+  templateUrl: '../../../../../../libs/articles/feature-articles-list/src/article-list.component.html',
   imports: [ArticleListItemComponent, PagerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

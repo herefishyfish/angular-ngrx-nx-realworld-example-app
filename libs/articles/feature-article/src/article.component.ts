@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ArticleStore } from '@realworld/articles/data-access';
-import { AuthStore } from '@realworld/auth/data-access';
+import { ArticleComponentBase } from './article.component.base';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
@@ -12,49 +11,7 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
   imports: [ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent, RouterLink],
+  schemas: [NO_ERRORS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticleComponent implements OnInit, OnDestroy {
-  slug = input<string>('');
-
-  private readonly authStore = inject(AuthStore);
-  private readonly articleStore = inject(ArticleStore);
-
-  $article = this.articleStore.data;
-  $comments = this.articleStore.comments;
-
-  $authorUsername = this.articleStore.data.author.username;
-  $isAuthenticated = this.authStore.loggedIn;
-  $currentUser = this.authStore.user;
-  $canModify = computed(() => this.authStore.user.username() === this.$authorUsername());
-
-  ngOnInit() {
-    this.articleStore.getArticle(this.slug());
-    this.articleStore.getComments(this.slug());
-  }
-
-  follow(username: string) {
-    this.articleStore.followUser(username);
-  }
-  unfollow(username: string) {
-    this.articleStore.unfollowUser(username);
-  }
-  favorite(slug: string) {
-    this.articleStore.favouriteArticle(slug);
-  }
-  unfavorite(slug: string) {
-    this.articleStore.unFavouriteArticle(slug);
-  }
-  delete(slug: string) {
-    this.articleStore.deleteArticle(slug);
-  }
-  deleteComment(data: { commentId: number; slug: string }) {
-    this.articleStore.deleteComment(data);
-  }
-  submit(comment: string) {
-    this.articleStore.addComment(comment);
-  }
-  ngOnDestroy() {
-    this.articleStore.initializeArticle();
-  }
-}
+export class ArticleComponent extends ArticleComponentBase {}

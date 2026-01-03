@@ -3,11 +3,14 @@
   "main": "./src/main.ts",
   "license": "SEE LICENSE IN <your-license-filename>",
   "version": "0.0.0",
+  "scripts": {
+    "postinstall": "npx patch-package"
+  },
   "dependencies": {
     "@nativescript-community/ui-collectionview": "^6.0.13",
     "@nativescript-community/ui-drawer": "^0.1.31",
     "@nativescript/core": "*",
-    "@triniwiz/nativescript-masonkit": "1.0.0-alpha.36"
+    "@triniwiz/nativescript-masonkit": "beta"
   },
   "devDependencies": {
     "@nativescript/android": "~9.0.0",

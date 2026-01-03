@@ -12,6 +12,8 @@ import { routes } from './app.routes';
 import { AppComponent } from './app.component';
 import { environment } from './environments/environment.prod';
 import { API_URL } from '@realworld/core/http-client/src';
+import { DRAWER_SERVICE } from '@realworld/home/feature-home';
+import { DrawerService } from './core/services/drawer.service';
 
 
 /**
@@ -20,12 +22,16 @@ import { API_URL } from '@realworld/core/http-client/src';
 import * as MasonKitWeb from "@triniwiz/nativescript-masonkit/web";
 Object.values(MasonKitWeb).forEach((component: any) => {
   if (typeof component === "function") {
+    console.log("Registering MasonKit Web component:", component.prototype.constructor.name);
     registerElement(
       component.prototype.constructor.name.toLowerCase(),
       () => component
     );
   }
 });
+import { Button, View } from '@triniwiz/nativescript-masonkit';
+registerElement('button', () => Button);
+registerElement('a', () => View);
 
 /**
  * Install UI Drawer gestures
@@ -35,6 +41,9 @@ installDrawer();
 
 import { installButtonPatch } from './core/web/button';
 installButtonPatch();
+
+import { TextField } from '@nativescript/core';
+registerElement('input', () => TextField);
 
 /**
  * Disable zone by setting this to true
@@ -50,6 +59,7 @@ runNativeScriptAngularApp({
         provideNativeScriptRouter(routes),
         EXPERIMENTAL_ZONELESS ? provideZonelessChangeDetection() : provideNativeScriptNgZone(),
         { provide: API_URL, useValue: environment.api_url },
+        { provide: DRAWER_SERVICE, useExisting: DrawerService },
       ],
     });
   },

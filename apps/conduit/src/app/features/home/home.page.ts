@@ -5,7 +5,7 @@ import { ArticleListComponent } from '../article-list/article-list.component';
 
 @Component({
   selector: 'cdt-home',
-  templateUrl: './home.page.html',
+  templateUrl: '../../../../../../libs/home/feature-home/src/home.component.html',
   styleUrls: ['./home.page.css'],
   imports: [NgClass, TagsListComponent, ArticleListComponent],
   providers: [HomeStore],

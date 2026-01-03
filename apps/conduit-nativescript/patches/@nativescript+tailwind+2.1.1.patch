@@ -1,0 +1,32 @@
+diff --git a/node_modules/@nativescript/tailwind/src/removeUnsupported.js b/node_modules/@nativescript/tailwind/src/removeUnsupported.js
+index 73a130a..1ee32e5 100644
+--- a/node_modules/@nativescript/tailwind/src/removeUnsupported.js
++++ b/node_modules/@nativescript/tailwind/src/removeUnsupported.js
+@@ -158,6 +158,27 @@ module.exports = (options = { debug: false }) => {
+ module.exports.postcss = true;
+ 
+ const supportedProperties = {
++  "display": true,
++  "grid-area": true,
++  "grid-template-areas": true,
++  "grid-template-rows": true,
++  "grid-template-columns": true,
++  "grid-row-start": true,
++  "grid-row-end": true,
++  "grid-column-start": true,
++  "grid-column-end": true,
++  gap: true,
++  "grid-gap": true,
++  "row-gap": true,
++  "column-gap": true,
++  "grid-auto-rows": true,
++  "grid-auto-columns": true,
++  "grid-auto-flow": ["row", "column", "row dense", "column dense"],
++  "overflow": true,
++  "overflow-x": true,
++  "overflow-y": true,
++  "max-height": true,
++  "max-width": true,
+   "align-content": true,
+   "align-items": true,
+   "align-self": true,
