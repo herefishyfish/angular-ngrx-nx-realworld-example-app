@@ -30,12 +30,16 @@ Object.values(MasonKitWeb).forEach((component: any) => {
     );
   }
 });
-import { Button, View } from '@triniwiz/nativescript-masonkit';
+import { Button, View, Input } from '@triniwiz/nativescript-masonkit';
 registerElement('button', () => Button);
-
+registerElement('input', () => Input);
 @CSSType('a')
 class Anchor extends View {}
 registerElement('a', () => Anchor);
+
+@CSSType('form')
+class Form extends View {}
+registerElement('form', () => Form);
 
 /**
  * Install UI Drawer gestures
@@ -43,11 +47,8 @@ registerElement('a', () => Anchor);
 import { install as installDrawer } from '@nativescript-community/ui-drawer';
 installDrawer();
 
-import { installButtonPatch } from './core/web/button';
+import { installButtonPatch } from './core/web-compat/button';
 installButtonPatch([Anchor]);
-
-import { TextField } from '@nativescript/core';
-registerElement('input', () => TextField);
 
 /**
  * Disable zone by setting this to true

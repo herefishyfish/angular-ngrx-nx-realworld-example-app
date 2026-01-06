@@ -5,12 +5,12 @@ import { RouterLink } from '@angular/router';
 import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
-  selector: 'cdt-login',
-  templateUrl: './login.component.html',
+  selector: 'cdt-login-form',
+  templateUrl: './login-form.component.html',
   imports: [ListErrorsComponent, RouterLink, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class LoginFormComponent {
   private readonly authStore = inject(AuthStore);
   private readonly fb = inject(FormBuilder);
 

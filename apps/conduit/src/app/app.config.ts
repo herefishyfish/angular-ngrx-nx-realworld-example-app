@@ -22,11 +22,11 @@ export const appConfig: ApplicationConfig = {
         },
         {
           path: 'login',
-          loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginComponent),
+          loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginPageComponent),
         },
         {
           path: 'register',
-          loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterComponent),
+          loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterPageComponent),
         },
         {
           path: 'article',

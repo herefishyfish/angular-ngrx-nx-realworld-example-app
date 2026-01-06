@@ -5,13 +5,12 @@ import { AuthStore } from '@realworld/auth/data-access';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'cdt-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'cdt-register-form',
+  templateUrl: './register-form.component.html',
   imports: [ListErrorsComponent, RouterModule, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent {
+export class RegisterFormComponent {
   private readonly authStore = inject(AuthStore);
   private readonly fb = inject(FormBuilder);
 

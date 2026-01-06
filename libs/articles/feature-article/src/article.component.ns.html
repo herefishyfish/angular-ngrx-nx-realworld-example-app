@@ -2,9 +2,9 @@
   <NavigationButton text="Back" (tap)="goBack()" android.systemIcon="ic_menu_back"></NavigationButton>
 </ActionBar>
 
-<StackLayout>
+<GridLayout rows="*">
   @if (!$isLoading()) { @if ($article(); as article) {
-  <ScrollView>
+  <ScrollView row="0">
     <div>
       <div class="p-4 bg-[#333]">
         <!-- Article Title -->
@@ -69,9 +69,9 @@
     </div>
   </ScrollView>
   } } @else {
-  <StackLayout class="p-4">
+  <StackLayout row="0" class="p-4">
     <ActivityIndicator busy="true" class="m-4"></ActivityIndicator>
     <span class="text-center text-gray-500">Loading article...</span>
   </StackLayout>
   }
-</StackLayout>
+</GridLayout>
