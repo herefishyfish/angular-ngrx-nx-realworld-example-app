@@ -22,7 +22,7 @@ export const routes: Routes = [
   {
     path: 'settings',
     loadComponent: () =>
-      import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
+      import('@realworld/settings/feature-settings').then((settings) => settings.SettingsPageComponent),
     canActivate: [AuthGuard],
   },
   {
@@ -31,7 +31,7 @@ export const routes: Routes = [
   },
   {
     path: 'article/:slug',
-    loadComponent: () => import('@realworld/articles/article').then((m) => m.ArticleComponent),
+    loadComponent: () => import('@realworld/articles/article').then((m) => m.ArticlePageComponent),
   },
   // {
   //   path: 'benchmark',

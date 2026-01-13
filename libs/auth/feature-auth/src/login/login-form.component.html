@@ -35,6 +35,7 @@
             class="float-right py-3 px-6 text-xl leading-normal text-white bg-[#5CB85C] border border-[#5CB85C] rounded-md cursor-pointer hover:bg-[#449d44] disabled:opacity-65 disabled:cursor-not-allowed"
             [disabled]="form.invalid || form.pending"
             type="submit"
+            (tap)="onSubmit()"
           >
             Sign in
           </button>

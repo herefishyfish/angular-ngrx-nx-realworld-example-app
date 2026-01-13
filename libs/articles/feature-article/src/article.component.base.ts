@@ -1,16 +1,22 @@
-import { Directive, OnDestroy, OnInit, computed, inject, input } from '@angular/core';
+import { Directive, OnDestroy, computed, effect, inject, input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleStore } from '@realworld/articles/data-access';
 import { AuthStore } from '@realworld/auth/data-access';
 
 @Directive()
-export abstract class ArticleComponentBase implements OnInit, OnDestroy {
+export abstract class ArticleComponentBase implements OnDestroy {
   slug = input<string>('');
 
   protected readonly authStore = inject(AuthStore);
   protected readonly articleStore = inject(ArticleStore);
   protected readonly route = inject(ActivatedRoute);
 
+  // Use deep signal selectors for individual properties
+  $articleTitle = this.articleStore.data.title;
+  $articleBody = this.articleStore.data.body;
+  $articleSlug = this.articleStore.data.slug;
+  $articleTagList = this.articleStore.data.tagList;
+  
   $article = this.articleStore.data;
   $comments = this.articleStore.comments;
   $isLoading = this.articleStore.getArticleLoading;
@@ -20,10 +26,14 @@ export abstract class ArticleComponentBase implements OnInit, OnDestroy {
   $currentUser = this.authStore.user;
   $canModify = computed(() => this.authStore.user.username() === this.$authorUsername());
 
-  ngOnInit() {
-    const slugValue = this.slug() || this.route.snapshot.params['slug'];
-    this.articleStore.getArticle(slugValue);
-    this.articleStore.getComments(slugValue);
+  constructor() {
+    effect(() => {
+      const slugValue = this.slug() || this.route.snapshot.params['slug'];
+      if (slugValue) {
+        this.articleStore.getArticle(slugValue);
+        this.articleStore.getComments(slugValue);
+      }
+    });
   }
 
   follow(username: string) {
@@ -53,9 +63,6 @@ export abstract class ArticleComponentBase implements OnInit, OnDestroy {
   submit(comment: string) {
     this.articleStore.addComment(comment);
   }
-
-  // @ts-ignore
-  goBack() {}
 
   ngOnDestroy() {
     this.articleStore.initializeArticle();

@@ -1,49 +1,50 @@
-<div class="inline-flex items-center">
+<div class="flex items-center">
   <a data-testid="article-author" [routerLink]="['/profile', article().author.username]">
-    <img [src]="article().author.image" class="w-8 h-8 rounded-full" />
+    <img [src]="article().author.image" class="w-8 h-8 rounded-full" style="border-radius: 100px;" />
   </a>
-  <div class="flex flex-col ml-2 mr-6 leading-none">
+  <div class="grid ml-2 mr-6 leading-none">
     <a class="font-medium text-[#5CB85C] hover:text-[#3d8b3d] hover:underline" [routerLink]="['/profile', article().author.username]">
       {{ article().author.username }}
     </a>
-    <span class="text-[#bbb] text-xs">{{ article().createdAt | date: 'longDate' }}</span>
+    <span class="text-[#bbb] text-xs" style="font-size: 9">{{ article().createdAt | date: 'longDate' }}</span>
   </div>
 
-  <span [hidden]="!canModify()">
-    <a class="inline-block py-1 px-2 text-sm rounded border border-[#ccc] text-[#ccc] bg-transparent hover:bg-[#ccc] hover:text-white cursor-pointer no-underline mr-1" [routerLink]="['/editor', article().slug]">
-      <i class="ion-edit"></i> Edit Article
-    </a>
+  @if (canModify()) {
+    <div class="flex gap-2">
+      <a class="inline-block py-1 px-2 text-sm rounded border border-[#ccc] text-[#ccc] bg-transparent hover:bg-[#ccc] hover:text-white cursor-pointer no-underline" [routerLink]="['/editor', article().slug]">
+        Edit Article
+      </a>
 
-    <button class="py-1 px-2 text-sm rounded border border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white cursor-pointer" (click)="deleteArticle()">
-      <i class="ion-trash-a"></i> Delete Article
-    </button>
-  </span>
+      <button class="py-1 px-2 text-sm rounded border border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white cursor-pointer" (click)="deleteArticle()">
+        Delete Article
+      </button>
+    </div>
+  }
 
-  <span [hidden]="canModify()">
-    <button
-      class="py-1 px-2 text-sm rounded border cursor-pointer mr-1"
-      [ngClass]="{
-        'border-[#ccc] text-[#ccc] bg-transparent hover:bg-[#ccc] hover:text-white': !article().author.following,
-        'bg-[#ccc] text-white border-[#ccc]': article().author.following
-      }"
-      (click)="toggleFollow()"
-    >
-      <i class="ion-plus-round"></i>
-      &nbsp; {{ article().author.following ? 'Unfollow' : 'Follow' }}
-      {{ article().author.username }}
-    </button>
-    &nbsp;&nbsp;
-    <button
-      class="py-1 px-2 text-sm rounded border cursor-pointer"
-      [ngClass]="{
-        'border-[#5CB85C] text-[#5CB85C] bg-transparent hover:bg-[#5CB85C] hover:text-white': !article().favorited,
-        'bg-[#5CB85C] text-white border-[#5CB85C]': article().favorited
-      }"
-      (click)="toggleFavorite()"
-    >
-      <i class="ion-heart"></i>
-      &nbsp; {{ article().favorited ? 'Unfavorite' : 'Favorite' }} Post
-      <span class="text-[#aaa] ml-1">({{ article().favoritesCount }})</span>
-    </button>
-  </span>
+  @if (!canModify()) {
+    <div class="flex gap-2">
+      <button
+        class="py-1 px-2 text-sm rounded border cursor-pointer"
+        [ngClass]="{
+          'border-[#ccc] text-[#ccc] bg-transparent hover:bg-[#ccc] hover:text-white': !article().author.following,
+          'bg-[#ccc] text-white border-[#ccc]': article().author.following
+        }"
+        (click)="toggleFollow()"
+      >
+        {{ article().author.following ? 'Unfollow' : 'Follow' }}
+        {{ article().author.username }}
+      </button>
+      <button
+        class="py-1 px-2 text-sm rounded border cursor-pointer"
+        [ngClass]="{
+          'border-[#5CB85C] text-[#5CB85C] bg-transparent hover:bg-[#5CB85C] hover:text-white': !article().favorited,
+          'bg-[#5CB85C] text-white border-[#5CB85C]': article().favorited
+        }"
+        (click)="toggleFavorite()"
+      >
+        {{ article().favorited ? 'Unfavorite' : 'Favorite' }} Post
+        <span class="text-[#aaa] ml-1">({{ article().favoritesCount }})</span>
+      </button>
+    </div>
+  }
 </div>

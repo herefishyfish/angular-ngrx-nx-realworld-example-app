@@ -5,7 +5,7 @@
     "types": []
   },
   "include": [
-    "./src/environments/environment.*.ts",
+    "./src/**/*.ts",
     "../../libs/**/*.ns.ts"
   ],
   "files": ["./references.d.ts", "./src/main.ts", "./src/polyfills.ts"]

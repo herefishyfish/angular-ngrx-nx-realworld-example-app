@@ -1,22 +1,22 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from '@realworld/auth/data-access';
-import { ArticleEditComponent } from './article-edit.component';
+import { ArticleEditPageComponent } from './article-edit.page';
 import { articleEditResolver } from './resolvers/article-edit-resolver';
 
 export const ARTICLE_EDIT_ROUTES: Routes = [
   {
     path: '',
-    component: ArticleEditComponent,
+    component: ArticleEditPageComponent,
     children: [
       {
         path: '',
         pathMatch: 'full',
-        component: ArticleEditComponent,
+        component: ArticleEditPageComponent,
         canActivate: [AuthGuard],
       },
       {
         path: ':slug',
-        component: ArticleEditComponent,
+        component: ArticleEditPageComponent,
         resolve: { articleEditResolver },
       },
     ],

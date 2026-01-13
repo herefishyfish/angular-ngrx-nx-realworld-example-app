@@ -1,0 +1,66 @@
+<div>
+  <div class="py-4 text-center bg-[#f3f3f3]">
+    <div class="max-w-[1140px] mx-auto px-4">
+      <div class="flex flex-wrap -mx-4">
+        <div class="px-4 w-full md:w-10/12 md:ml-[8.333%]">
+          <img [src]="$image()" class="w-[100px] h-[100px] rounded-full mx-auto mb-4" />
+          <h4 data-testid="article-author-profile" [hidden]="$profileLoading()" class="text-2xl font-bold mb-2">
+            {{ $username() }}
+          </h4>
+          <p class="text-[#aaa] font-light mb-4">{{ $bio() }}</p>
+          <button
+            [hidden]="$isUser()"
+            class="float-right py-1 px-2 text-sm rounded border cursor-pointer"
+            [ngClass]="{
+              'border-[#ccc] text-[#ccc] bg-transparent hover:bg-[#ccc] hover:text-white': !$following(),
+              'bg-[#ccc] text-white border-[#ccc]': $following()
+            }"
+            (click)="toggleFollowing()"
+          >
+            <i class="ion-plus-round"></i>
+            &nbsp; {{ $following() ? 'Unfollow' : 'Follow' }}
+            {{ $username() }}
+          </button>
+          <a
+            [routerLink]="['/settings']"
+            [hidden]="$isUser() === false"
+            class="float-right py-1 px-2 text-sm rounded border border-[#ccc] text-[#ccc] bg-transparent hover:bg-[#ccc] hover:text-white cursor-pointer no-underline"
+          >
+            <i class="ion-gear-a"></i> Edit Profile Settings
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-[1140px] mx-auto px-4">
+    <div class="flex flex-wrap -mx-4">
+      <div class="px-4 w-full md:w-10/12 md:ml-[8.333%]">
+        <div class="-mb-px mt-6">
+          <ul class="list-none p-0 m-0 after:content-[''] after:table after:clear-both">
+            <li class="float-left">
+              <a
+                class="block py-2 px-4 rounded-none border-b-2 border-transparent bg-transparent text-[#aaa] cursor-pointer hover:text-[#555] hover:no-underline [&.active]:border-b-[#5CB85C] [&.active]:text-[#5CB85C]"
+                [routerLink]="['/profile', $username()]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >My Articles</a
+              >
+            </li>
+            <li class="float-left ml-1">
+              <a
+                class="block py-2 px-4 rounded-none border-b-2 border-transparent bg-transparent text-[#aaa] cursor-pointer hover:text-[#555] hover:no-underline [&.active]:border-b-[#5CB85C] [&.active]:text-[#5CB85C]"
+                [routerLink]="['/profile', $username(), 'favorites']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >Favorited Articles</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

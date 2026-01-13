@@ -21,6 +21,7 @@ export class RegisterFormComponent {
   });
 
   onSubmit() {
+    console.log('Register form submitted', this.form.getRawValue());
     this.authStore.register(this.form.getRawValue());
     this.form.reset();
   }

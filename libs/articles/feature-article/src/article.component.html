@@ -1,10 +1,10 @@
-@if ($article(); as article) {
+@if ($articleSlug(); as slug) {
   <div>
     <div class="py-8 mb-8 bg-[#333] text-white">
-      <div class="max-w-[1140px] mx-auto px-4">
-        <h1 data-testid="article-title" class="text-4xl font-semibold mb-8 [text-shadow:0px_1px_3px_rgba(0,0,0,0.3)]">{{ article.title }}</h1>
+      <div class="grid max-w-[1140px] mx-auto px-4">
+        <h1 data-testid="article-title" class="text-4xl font-semibold mb-8">{{ $articleTitle() }}</h1>
         <cdt-article-meta
-          [article]="article"
+          [article]="$article()"
           (follow)="follow($event)"
           (unfollow)="unfollow($event)"
           (favorite)="favorite($event)"
@@ -19,16 +19,13 @@
     <div class="max-w-[1140px] mx-auto px-4 py-4">
       <div class="flex flex-wrap -mx-4">
         <div class="px-4 w-full">
-          <div data-testid="article-body" class="text-lg leading-7 mb-4">
-            {{ article.body | markdown }}
-          </div>
-          <div data-testid="article-body" class="text-lg leading-7 mb-4" [innerHTML]="article.body | markdown"></div>
+          <cdt-article-body [body]="$articleBody()" />
         </div>
       </div>
       <hr class="my-4 border-t border-gray-200" />
       <div class="text-center mb-8">
         <cdt-article-meta
-          [article]="article"
+          [article]="$article()"
           (follow)="follow($event)"
           (unfollow)="unfollow($event)"
           (favorite)="favorite($event)"
@@ -38,20 +35,24 @@
         ></cdt-article-meta>
       </div>
 
-      <div class="flex flex-wrap -mx-4">
+      <div class="flex flex-wrap -mx-4 my-4">
         <div class="px-4 w-full md:w-2/3 md:ml-[16.667%]">
           @if ($isAuthenticated()) {
-            <cdt-add-comment [article]="article" [currentUser]="$currentUser()" (submitComment)="submit($event)" />
+            <cdt-add-comment [article]="$article()" [currentUser]="$currentUser()" (submitComment)="submit($event)" />
           } @else {
-            <a [routerLink]="['/login']" class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline">Sign in</a> or <a [routerLink]="['/register']" class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline">sign up</a> to add comments on
-            this article.
+            <div class="flex items-center flex-wrap ">
+              <a [routerLink]="['/login']" class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline">Sign in</a>
+              <span> or </span>
+              <a [routerLink]="['/register']" class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline">sign up</a>
+              <span> to add comments on this article.</span>
+            </div>
           }
 
           @for (comment of $comments(); track comment.id) {
             <cdt-article-comment
               [currentUser]="$currentUser()"
               (delete)="deleteComment($event)"
-              [article]="article"
+              [article]="$article()"
               [comment]="comment"
             ></cdt-article-comment>
           }

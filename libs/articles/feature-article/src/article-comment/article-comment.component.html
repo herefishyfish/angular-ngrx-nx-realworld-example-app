@@ -1,20 +1,21 @@
-<div class="border border-[#e5e5e5] rounded mt-4">
-  <div class="p-5">
-    <p class="mb-0 leading-relaxed">{{ comment().body }}</p>
-  </div>
-  <div class="py-3 px-5 bg-[#f5f5f5] border-t border-[#e5e5e5] text-[#aaa] text-xs">
-    <a class="inline-block mr-1" [routerLink]="['/profile', comment().author.username]">
-      <img [src]="comment().author.image" class="w-5 h-5 rounded-full" />
-    </a>
-    &nbsp;
-    <a class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline" [routerLink]="['/profile', comment().author.username]">
-      {{ comment().author.username }}
-    </a>
-    <span class="ml-2">
-      {{ comment().createdAt | date: 'longDate' }}
-    </span>
-    <span class="float-right" [hidden]="currentUser().username !== comment().author.username">
-      <i class="ion-trash-a cursor-pointer hover:text-red-500" (click)="delete.emit({ commentId: comment().id, slug: article().slug })"></i>
-    </span>
+<div class="flex w-full">
+  <div class="border border-[#e5e5e5] rounded mt-4 overflow-hidden w-full">
+    <div class="p-5">
+      <p class="mb-0 leading-relaxed break-words">{{ comment().body }}</p>
+    </div>
+    <div class="grid grid-cols-[auto_auto_1fr_auto] items-center gap-2 py-3 px-5 bg-[#f5f5f5] border-t border-[#e5e5e5] text-[#aaa] text-xs">
+      <a [routerLink]="['/profile', comment().author.username]">
+        <img [src]="comment().author.image" class="w-5 h-5 rounded-full" />
+      </a>
+      <a class="text-[#5CB85C] hover:text-[#3d8b3d] hover:underline" [routerLink]="['/profile', comment().author.username]">
+        {{ comment().author.username }}
+      </a>
+      <span>
+        {{ comment().createdAt | date: 'longDate' }}
+      </span>
+      @if (currentUser().username === comment().author.username) {
+        <p class="cursor-pointer hover:text-red-500" (click)="delete.emit({ commentId: comment().id, slug: article().slug })">🗑️</p>
+      }
+    </div>
   </div>
 </div>

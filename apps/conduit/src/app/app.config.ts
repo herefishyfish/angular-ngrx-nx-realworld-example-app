@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
         {
           path: 'settings',
           loadComponent: () =>
-            import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
+            import('@realworld/settings/feature-settings').then((settings) => settings.SettingsPageComponent),
           canActivate: [AuthGuard],
         },
         {
