@@ -1,7 +1,7 @@
 import { ApiService } from '@realworld/core/http-client';
 import { User, UserResponse } from '@realworld/core/api-types';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { LoginUser, LoginUserRequest, NewUserRequest, NewUser } from '@realworld/core/api-types';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +9,13 @@ export class AuthService {
   private readonly apiService = inject(ApiService);
 
   user(): Observable<UserResponse> {
-    return this.apiService.get<UserResponse>('/user');
+    console.log('[AuthService] user: Fetching current user from /user');
+    return this.apiService.get<UserResponse>('/user').pipe(
+      tap({
+        next: (response) => console.log('[AuthService] user: Response received', response),
+        error: (err) => console.log('[AuthService] user: Error', err.status, err.message),
+      }),
+    );
   }
 
   update(user: User): Observable<UserResponse> {
@@ -17,7 +23,13 @@ export class AuthService {
   }
 
   login(credentials: LoginUser): Observable<UserResponse> {
-    return this.apiService.post<UserResponse, LoginUserRequest>('/users/login', { user: credentials });
+    console.log('[AuthService] login: Posting to /users/login');
+    return this.apiService.post<UserResponse, LoginUserRequest>('/users/login', { user: credentials }).pipe(
+      tap({
+        next: (response) => console.log('[AuthService] login: Response received', response),
+        error: (err) => console.log('[AuthService] login: Error', err.status, err.message),
+      }),
+    );
   }
 
   logout(): Observable<{ message: string }> {

@@ -15,7 +15,6 @@ import { ActionsService } from './services/actions.service';
 import { Article } from '@realworld/core/api-types';
 
 export const ArticlesListStore = signalStore(
-  { providedIn: 'root' },
   withState<ArticlesListState>(articlesListInitialState),
   withComputed(({ listConfig, articles }) => ({
     totalPages: computed(() =>

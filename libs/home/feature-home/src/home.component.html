@@ -10,34 +10,36 @@
     <div class="flex flex-wrap -mx-4">
       <div class="px-4 w-full md:w-3/4">
         <div class="-mb-px">
-          @if ({ listConfig: $listConfig() }; as model) {
-            <ul class="list-none p-0 m-0 after:content-[''] after:table after:clear-both">
-              <li class="float-left">
-                <a 
-                  [ngClass]="{ 'border-b-[#5CB85C] !text-[#5CB85C]': model.listConfig.type === 'FEED' }" 
-                  class="block py-2 px-4 rounded-none border-b-2 border-transparent bg-transparent text-[#aaa] cursor-pointer hover:text-[#555] hover:no-underline"
-                  (click)="setListTo('FEED')"
-                  >Your Feed</a
-                >
-              </li>
-              <li class="float-left ml-1">
-                <a
-                  data-testid="global-feed"
-                  [ngClass]="{
-                    'border-b-[#5CB85C] !text-[#5CB85C]': model.listConfig.type === 'ALL' && !model.listConfig.filters.tag
-                  }"
-                  class="block py-2 px-4 rounded-none border-b-2 border-transparent bg-transparent text-[#aaa] cursor-pointer hover:text-[#555] hover:no-underline"
-                  (click)="setListTo('ALL')"
-                  >Global Feed</a
-                >
-              </li>
-              <li class="float-left ml-1" [hidden]="!model.listConfig.filters.tag">
-                <a class="block py-2 px-4 rounded-none border-b-2 border-b-[#5CB85C] bg-transparent text-[#5CB85C]">
-                  <i class="ion-pound"></i>
-                  {{ model.listConfig.filters.tag }}
-                </a>
-              </li>
-            </ul>
+          @if ($listConfig; as listConfig) {
+            @if ({ config: listConfig() }; as model) {
+              <ul class="list-none p-0 m-0 after:content-[''] after:table after:clear-both">
+                <li class="float-left">
+                  <a 
+                    [ngClass]="{ 'border-b-[#5CB85C] !text-[#5CB85C]': model.config.type === 'FEED' }" 
+                    class="block py-2 px-4 rounded-none border-b-2 border-transparent bg-transparent text-[#aaa] cursor-pointer hover:text-[#555] hover:no-underline"
+                    (click)="setListTo('FEED')"
+                    >Your Feed</a
+                  >
+                </li>
+                <li class="float-left ml-1">
+                  <a
+                    data-testid="global-feed"
+                    [ngClass]="{
+                      'border-b-[#5CB85C] !text-[#5CB85C]': model.config.type === 'ALL' && !model.config.filters.tag
+                    }"
+                    class="block py-2 px-4 rounded-none border-b-2 border-transparent bg-transparent text-[#aaa] cursor-pointer hover:text-[#555] hover:no-underline"
+                    (click)="setListTo('ALL')"
+                    >Global Feed</a
+                  >
+                </li>
+                <li class="float-left ml-1" [hidden]="!model.config.filters.tag">
+                  <a class="block py-2 px-4 rounded-none border-b-2 border-b-[#5CB85C] bg-transparent text-[#5CB85C]">
+                    <i class="ion-pound"></i>
+                    {{ model.config.filters.tag }}
+                  </a>
+                </li>
+              </ul>
+            }
           }
         </div>
 

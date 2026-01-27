@@ -1,9 +1,9 @@
 import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
-import { AuthGuard } from '@realworld/auth/data-access';
+import { AuthGuard, provideWebAuthStorage } from '@realworld/auth/data-access';
 import { errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { API_URL } from '@realworld/core/http-client';
+import { API_URL, provideWebAppRouter } from '@realworld/core/http-client';
 import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
@@ -53,5 +53,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptors([errorHandlingInterceptor])),
     { provide: API_URL, useValue: environment.api_url },
+    provideWebAuthStorage(),
+    provideWebAppRouter(),
   ],
 };

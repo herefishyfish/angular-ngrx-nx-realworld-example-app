@@ -5,11 +5,12 @@ import { HomeStore } from './home.store';
 
 @Directive()
 export abstract class HomeComponentBase {
-  protected readonly articlesListStore = inject(ArticlesListStore);
+  /** Optional - only provided for web where parent controls the list */
+  protected readonly articlesListStore = inject(ArticlesListStore, { optional: true });
   protected readonly authStore = inject(AuthStore);
   protected readonly homeStore = inject(HomeStore);
 
-  $listConfig = this.articlesListStore.listConfig;
+  $listConfig = this.articlesListStore?.listConfig;
   $tags = this.homeStore.tags;
 
   readonly loadArticlesOnLogin = effect(() => {
@@ -18,9 +19,10 @@ export abstract class HomeComponentBase {
   });
 
   setListTo(type: ListType = 'ALL') {
+    if (!this.articlesListStore) return;
     const config = { ...articlesListInitialState.listConfig, type };
     this.articlesListStore.setListConfig(config);
-    this.articlesListStore.loadArticles(this.$listConfig());
+    this.articlesListStore.loadArticles(this.$listConfig?.() ?? config);
   }
 
   getArticles(isLoggedIn: boolean) {
@@ -32,6 +34,7 @@ export abstract class HomeComponentBase {
   }
 
   setListTag(tag: string) {
+    if (!this.articlesListStore) return;
     this.articlesListStore.setListConfig({
       ...articlesListInitialState.listConfig,
       filters: {
@@ -39,9 +42,28 @@ export abstract class HomeComponentBase {
         tag,
       },
     });
-    this.articlesListStore.loadArticles(this.$listConfig());
+    this.articlesListStore.loadArticles(this.$listConfig?.() ?? articlesListInitialState.listConfig);
   }
 
   /** Override in platform-specific implementations */
-  openDrawer() {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  openDrawer(): void {}
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  onPagerLoaded(_args: unknown): void {}
+
+  /** Tab selection for NativeScript pager - override in .ns.ts */
+  selectedTabIndex = 0;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  selectTab(_index: number): void {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  onPagerIndexChanged(_event: unknown): void {}
+
+  /** NativeScript pager properties - override in .ns.ts */
+  readonly tabs: { name: string; type: 'FEED' | 'ALL' }[] = [];
+  pagerScroll = (): number => 0;
+
+  /** Pull to refresh - override in .ns.ts */
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  onRefresh(_args: unknown): void {}
 }

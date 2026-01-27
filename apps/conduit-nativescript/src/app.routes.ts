@@ -26,7 +26,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'profile/:username',
+    path: 'profile',
     loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
   },
   {

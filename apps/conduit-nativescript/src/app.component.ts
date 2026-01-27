@@ -26,7 +26,10 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('drawer', { static: false }) drawerRef!: ElementRef<Drawer>;
 
   constructor() {
-    this.authStore.getUser();
+    // Note: On NativeScript, we don't call getUser() because cookies aren't persisted.
+    // The auth state is restored from ApplicationSettings in the AuthStore's onInit hook.
+    // Calling getUser() would always fail with 401 after an app restart.
+    // If you need to verify the session, implement token-based auth instead.
   }
 
   ngAfterViewInit() {

@@ -1,16 +1,31 @@
-import { Directive, inject } from '@angular/core';
+import { Directive, effect, inject, input, untracked } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArticlesListStore } from '@realworld/articles/data-access';
+import { ArticlesListStore, ListType, articlesListInitialState } from '@realworld/articles/data-access';
 
 @Directive()
 export abstract class ArticleListComponentBase {
   protected readonly articlesListStore = inject(ArticlesListStore);
   protected readonly router = inject(Router);
 
+  /** Optional: When provided, component manages its own data loading */
+  listType = input<ListType>();
+
   $totalPages = this.articlesListStore.totalPages;
   $articles = this.articlesListStore.articles.entities;
   $listConfig = this.articlesListStore.listConfig;
   $isLoading = this.articlesListStore.getArticlesLoading;
+
+  /** Auto-load articles when listType input is provided */
+  protected readonly loadOnInit = effect(() => {
+    const type = this.listType();
+    if (type) {
+      untracked(() => {
+        const config = { ...articlesListInitialState.listConfig, type };
+        this.articlesListStore.setListConfig(config);
+        this.articlesListStore.loadArticles(config);
+      });
+    }
+  });
 
   favorite(slug: string) {
     this.articlesListStore.favouriteArticle(slug);
@@ -45,5 +60,10 @@ export abstract class ArticleListComponentBase {
       });
       this.articlesListStore.loadArticles(this.$listConfig());
     }
+  }
+
+  /** Refresh articles - reloads with current config */
+  refreshArticles() {
+    this.articlesListStore.loadArticles(this.$listConfig());
   }
 }

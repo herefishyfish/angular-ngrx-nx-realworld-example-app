@@ -4,12 +4,13 @@ import { HomeComponentBase } from './home.component.base';
 import { HomeStore } from './home.store';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/articles-list';
+import { ArticlesListStore } from '@realworld/articles/data-access';
 
 @Component({
   selector: 'cdt-home',
   templateUrl: './home.component.html',
   imports: [NgClass, TagsListComponent, ArticleListComponent],
-  providers: [HomeStore],
+  providers: [HomeStore, ArticlesListStore],
   schemas: [NO_ERRORS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

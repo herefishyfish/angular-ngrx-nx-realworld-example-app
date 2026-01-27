@@ -3,6 +3,33 @@
   </ActionItem>
 </ActionBar>
 
-<GridLayout>
-  <cdt-article-list />
+<GridLayout rows="auto, *">
+  <!-- Tab buttons -->
+  <GridLayout row="0" rows="auto, 2" columns="*, *" class="bg-white">
+    @for (tab of tabs; track tab.type; let i = $index) {
+      <Button
+        [col]="i"
+        [text]="tab.name"
+        class="text-sm"
+        borderWidth="0"
+        style="android-elevation: -2;"
+        [color]="pagerScroll() | colorTransition: i:'#5cb85c':'#aaa'"
+        backgroundColor="white"
+        (tap)="selectTab(i)"
+      ></Button>
+    }
+    <ContentView row="1" colSpan="2" height="2">
+      <StackLayout horizontalAlignment="left" [translateX]="pagerScroll() * 200 + '%'" height="2" width="50%" backgroundColor="#5cb85c"></StackLayout>
+    </ContentView>
+  </GridLayout>
+
+  <!-- Pager with two article lists -->
+  <Pager row="1" [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onPagerIndexChanged($event)" (loaded)="onPagerLoaded($event)">
+    <GridLayout *pagerItem>
+      <cdt-article-list listType="ALL" />
+    </GridLayout>
+    <GridLayout *pagerItem>
+      <cdt-article-list listType="FEED" />
+    </GridLayout>
+  </Pager>
 </GridLayout>
