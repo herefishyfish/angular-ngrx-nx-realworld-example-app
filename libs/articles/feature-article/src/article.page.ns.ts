@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, inject, NO_ERRORS_SCHEMA } from '@a
 import { ActivatedRoute } from '@angular/router';
 import { NativeScriptCommonModule, RouterExtensions } from '@nativescript/angular';
 import { ArticleComponent } from './article.component';
+import { ArticleStore } from '@realworld/articles/data-access';
+import { registerElement } from '@nativescript/angular';
+import { PullToRefresh } from '@nativescript-community/ui-pulltorefresh';
+
+registerElement('PullToRefresh', () => PullToRefresh);
 
 @Component({
   selector: 'cdt-article-page',
@@ -9,9 +14,12 @@ import { ArticleComponent } from './article.component';
     <ActionBar title="Article">
       <NavigationButton text="Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
     </ActionBar>
-    <ScrollView>
-      <cdt-article [slug]="slug" [native]="true" />
-    </ScrollView>
+    <PullToRefresh (refresh)="onRefresh($event)">
+      <ScrollView>
+
+        <cdt-article [slug]="slug" [native]="true" />
+      </ScrollView>
+    </PullToRefresh>
   `,
   imports: [ArticleComponent, NativeScriptCommonModule],
   schemas: [NO_ERRORS_SCHEMA],
@@ -20,6 +28,7 @@ import { ArticleComponent } from './article.component';
 export class ArticlePageComponent {
   private readonly routerExtensions = inject(RouterExtensions);
   private readonly route = inject(ActivatedRoute);
+  private readonly articleStore = inject(ArticleStore);
   slug = this.route.snapshot.params['slug'];
 
   constructor() {
@@ -28,5 +37,16 @@ export class ArticlePageComponent {
 
   goBack() {
     this.routerExtensions.back();
+  }
+
+  onRefresh(args: { object: PullToRefresh }) {
+    const pullToRefresh = args.object;
+    
+    this.articleStore.getArticle(this.slug);
+    this.articleStore.getComments(this.slug);
+    
+    setTimeout(() => {
+      pullToRefresh.refreshing = false;
+    }, 1000);
   }
 }

@@ -61,6 +61,7 @@ export abstract class ArticleComponentBase implements OnDestroy {
   }
 
   submit(comment: string) {
+    console.log('[Article] Submitting comment:', comment);
     this.articleStore.addComment(comment);
   }
 

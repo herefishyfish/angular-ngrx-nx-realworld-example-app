@@ -1,0 +1,24 @@
+<div class="border-2 border-gray-300 rounded-lg mt-4">
+  <cdt-list-errors></cdt-list-errors>
+
+  <div [formGroup]="form" class="p-1">
+    <TextField
+      formControlName="comment"
+      hint="Write a comment..."
+      class="input text-base mb-2"
+    ></TextField>
+    <cdt-input-errors [control]="form.controls.comment"></cdt-input-errors>
+
+    <div class="bg-gray-100 p-2 rounded grid grid-cols-[auto_1fr_auto]">
+      <img
+        [src]="currentUser().image"
+        class="w-8 h-8 rounded-full"
+      />
+      <span></span>
+      <button
+        class="btn btn-primary text-sm"
+        (tap)="submit()"
+      >Post Comment</button>
+    </div>
+  </div>
+</div>

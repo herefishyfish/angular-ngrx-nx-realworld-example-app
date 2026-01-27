@@ -1,0 +1,39 @@
+<StackLayout class="p-4">
+  <cdt-list-errors></cdt-list-errors>
+
+  <StackLayout [formGroup]="form">
+    <TextField
+      formControlName="title"
+      hint="Article Title"
+      class="input text-lg mb-2"
+    ></TextField>
+    <cdt-input-errors [control]="form.controls.title"></cdt-input-errors>
+
+    <TextField
+      formControlName="description"
+      hint="What's this article about?"
+      class="input text-lg mb-2"
+    ></TextField>
+    <cdt-input-errors [control]="form.controls.description"></cdt-input-errors>
+
+    <TextField
+      formControlName="body"
+      hint="Write your article content"
+      class="input text-lg mb-2"
+    ></TextField>
+    <cdt-input-errors [control]="form.controls.body"></cdt-input-errors>
+
+    <TextField
+      formControlName="tagList"
+      hint="Enter tags (comma separated)"
+      class="input text-lg mb-4"
+    ></TextField>
+
+    <Button
+      text="Publish Article"
+      class="btn btn-primary text-lg"
+      [isEnabled]="form.valid && !form.pending"
+      (tap)="onSubmit()"
+    ></Button>
+  </StackLayout>
+</StackLayout>
