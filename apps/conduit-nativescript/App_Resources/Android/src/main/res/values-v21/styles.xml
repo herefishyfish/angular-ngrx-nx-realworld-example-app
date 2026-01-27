@@ -3,7 +3,8 @@
 
     <!-- Application theme -->
     <style name="AppThemeBase21" parent="AppThemeBase">
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:datePickerStyle">@style/SpinnerDatePicker</item>
         <item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
     </style>
@@ -23,6 +24,6 @@
 
     <style name="NativeScriptToolbarStyle" parent="NativeScriptToolbarStyleBase">
         <item name="android:elevation">4dp</item>
-        <item name="android:paddingTop">24dp</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 </resources>

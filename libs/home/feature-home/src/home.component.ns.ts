@@ -45,7 +45,7 @@ export class HomeComponent extends HomeComponentBase implements OnDestroy {
   override getArticles(isLoggedIn: boolean) {
     // Set initial tab based on login status - each list loads its own data
     // Index 0 = Global Feed, Index 1 = Your Feed
-    this.selectedTabIndex = isLoggedIn ? 1 : 0;
+    this.selectedTabIndex = 0;
     if (this.pager) {
       this.pager.selectedIndex = this.selectedTabIndex;
     }
